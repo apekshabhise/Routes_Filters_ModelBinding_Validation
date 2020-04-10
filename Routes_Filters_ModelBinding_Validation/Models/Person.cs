@@ -28,4 +28,6 @@ namespace Routes_Filters_ModelBinding_Validation.Models
     User,
     Guest
   }
+
+   
 }

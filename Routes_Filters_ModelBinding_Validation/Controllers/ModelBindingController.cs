@@ -7,35 +7,49 @@ using Routes_Filters_ModelBinding_Validation.Models;
 
 namespace Routes_Filters_ModelBinding_Validation.Controllers
 {
-  public class ModelBindingController : Controller
-  {
-    private IRepository repository;
-
-    public ModelBindingController(IRepository repo)
+    public class ModelBindingController : Controller
     {
-      repository = repo;
-    }
+        private IRepository repository;
 
-    public ViewResult Index(int id) => View(repository[id]);
+        public ModelBindingController(IRepository repo)
+        {
+            repository = repo;
+        }
 
-    public ViewResult IndexWithAddress(int id) => View(repository[id]);
+        public ViewResult Index(int id) => View(repository[id]);
 
-    public ViewResult IndexNullSafe(int id) => View(repository[id] ?? repository.People.First());
+        public ViewResult IndexWithAddress(int id) => View(repository[id]);
 
-    public ViewResult Create() => View(new Person());
+        public ViewResult IndexNullSafe(int id) => View(repository[id] ?? repository.People.First());
 
-    [HttpPost]
-    public ViewResult Create(Person model) => View("IndexNullSafe", model);
+        public ViewResult Create() => View(new Person());
 
-    public ViewResult CreateWithAddress() => View(new Person());
+        [HttpPost]
+        public ViewResult Create(Person model) => View("IndexNullSafe", model);
 
-    [HttpPost]
-    public ViewResult CreateWithAddress(Person model) => View("IndexWithAddress", model);
+        public ViewResult CreateWithAddress() => View(new Person());
 
-    public ViewResult NamesArray(string[] names) => View(names ?? new string[0]);
 
-    public ViewResult NamesList(IList<string> names) => View(names ?? new List<string>());
+        [HttpPost]
+        public ViewResult CreateWithAddress(Person model) => View("IndexWithAddress", model);
 
-    public ViewResult Address(IList<AddressSummary> addresses) => View(addresses ?? new List<AddressSummary>());
-  }
+        public ViewResult NamesArray(string[] names) => View(names ?? new string[0]);
+
+        public ViewResult NamesList(IList<string> names) => View(names ?? new List<string>());
+
+        public ViewResult Address(IList<AddressSummary> addresses) => View(addresses ?? new List<AddressSummary>());
+
+        public ViewResult Inclassexample()
+        {
+            Occupation occupation = new Occupation();
+            return View(occupation);
+        }
+        [HttpPost]
+
+        public ViewResult Inclassexample(Occupation occupation)
+        {
+        return View(occupation);
+        }
+    
+}
 }
